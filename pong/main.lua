@@ -1,4 +1,4 @@
--- Pong created in Lua using the love2D engine
+-- Pong created in Lua using the LÖVE framework
 
 -- window_width = 1920 -- window width and height at 16:9
 -- window_height = 1080        
