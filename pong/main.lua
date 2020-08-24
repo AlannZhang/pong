@@ -1,14 +1,23 @@
--- Pong created in Lua using the LÖVE framework
+--[[ 
+    Pong created in Lua using the love2D engine.
+    Can be played with 2 players, using w and s for player 1
+    and the up and down arrow keys for arrow 2. You can also play
+    by yourself with the computer. The library used is called classic,
+    allowing for classes in Lua. 
+]]
 
--- window_width = 1920 -- window width and height at 16:9
--- window_height = 1080        
+function love.load() 
+    Object = require "classic"
+    require "ball"
+    require "paddle1"
+    require "paddle2"
 
-function love.load() -- runs at start of the game
-    paddlespeed1 = 200
-    paddlespeed2 = 200   
+    b = Ball(400, 300, 7,7)
+    p1 = Paddle1(35, 30, 10, 70)
+    p2 = Paddle2(755, 500, 10, 70)
 
-    paddle1y = 30
-    paddle2y = 500
+    player1score = 0
+    playerscore = 0
 end
 
 function love.keypressed(key) -- press escape to quit pong
@@ -18,21 +27,12 @@ function love.keypressed(key) -- press escape to quit pong
 end
 
 function love.update(dt)
-        if love.keyboard.isDown("w") then
-        if paddle1y > 10 then
-            paddle1y = paddle1y - paddlespeed1 * dt
-        end
-    elseif love.keyboard.isDown('s') then 
-        if paddle1y < 520 then
-            paddle1y = paddle1y + paddlespeed1 * dt  
-        end 
-    end
-
-    if love.keyboard.isDown("up") then 
+    p1:update(dt) -- Paddle 1 movement
+    p2:update(dt) -- Paddle 2 movement
 end
 
 function love.draw()
-    love.graphics.circle('fill', 800/2, 600/2, 7, 7) --Ball
-    love.graphics.rectangle('fill', 35, paddle1y, 10, 70) --Paddle
-    love.graphics.rectangle('fill', 755, paddle2y, 10, 70) --Paddle
+    b:draw()
+    p1:draw()
+    p2:draw()
 end 
